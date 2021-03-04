@@ -42,4 +42,15 @@ def dot(K, L):
    return sum(i[0] * i[1] for i in zip(K, L))
 
 
+def main():
+    matrizA = SystemEquations()
+    matriz0 = SystemZero()
+    n = int(input("Cantidad de iteraciones: "))
+    for i in range(n):
+        x_n = matriz0
+        
+        for j in range(len(A)):
+            pass
+
+main()
 
