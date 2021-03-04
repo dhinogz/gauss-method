@@ -1,56 +1,23 @@
-""" Metodo de Jacobi """
-
 import numpy as np
+from scipy.linalg import solve
 
+def gauss(A, b, x, n):
 
-
-
-# Ask for system of equations
-def SystemEquations():  
-    N = int(input("Cantidad de ecuaciones en el sistema: "))
-    sysEq = []  
-
-    for i in range(N):
-        print("Ecuacion", i+1)
-        sysEq.append([])
-        for j in range(N):
-            x = int(input("Constante de x" + str(j+1) + ": "))
-
-            sysEq[i].append(x)
-            print(sysEq)
-
-    return sysEq
-
-def SystemZero():  
-    N = int(input("Cantidad de ecuaciones en el sistema: "))
-    sysZero = []  
-
-    for i in range(N):
-        print("Ecuacion", i+1)
-        sysZero.append([])
-        for j in range(N):
-            x = 0
-
-            sysZero[i].append(x)
-
-    return sysZero
-
-def dot(K, L):
-   if len(K) != len(L):
-      return 0
-
-   return sum(i[0] * i[1] for i in zip(K, L))
-
-
-def main():
-    matrizA = SystemEquations()
-    matriz0 = SystemZero()
-    n = int(input("Cantidad de iteraciones: "))
+    L = np.tril(A)
+    U = A - L
     for i in range(n):
-        x_n = matriz0
-        
-        for j in range(len(A)):
-            pass
+        x = np.dot(np.linalg.inv(L), b - np.dot(U, x))
+        #print(i+1)
+        print(x)
+    return x
 
-main()
+'''___MAIN___'''
 
+A = np.array([[4.0, -2.0, 1.0], [1.0, -3.0, 2.0], [-1.0, 2.0, 6.0]])
+b = [1.0, 2.0, 3.0]
+x = [1, 1, 1]
+
+n = 20
+
+print(gauss(A, b, x, n))
+#print(solve(A, b))
