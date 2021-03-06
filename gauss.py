@@ -1,23 +1,36 @@
 import numpy as np
-from scipy.linalg import solve
 
-def gauss(A, b, x, n):
-
-    L = np.tril(A)
-    U = A - L
-    for i in range(n):
-        x = np.dot(np.linalg.inv(L), b - np.dot(U, x))
-        #print(i+1)
-        print(x)
-    return x
-
-'''___MAIN___'''
-
+"""
 A = np.array([[4.0, -2.0, 1.0], [1.0, -3.0, 2.0], [-1.0, 2.0, 6.0]])
-b = [1.0, 2.0, 3.0]
-x = [1, 1, 1]
+b = np.array([1.0, 2.0, 3.0])
 
-n = 20
+A = np.array([[10., -1., 2., 0.],
+              [-1., 11., -1., 3.],
+              [2., -1., 10., -1.],
+              [0.0, 3., -1., 8.]])
+b = np.array([6., 25., -11., 15.])
 
-print(gauss(A, b, x, n))
-#print(solve(A, b))
+A = np.array([[5, -1, 2], [3, 8, -2], [1, 1, 4]])
+b = np.array([-1, 2, 3])
+"""
+
+# Sistema de ecuaciones A, b y x
+A = np.array([[5, -1, 2], [3, 8, -2], [1, 1, 4]])
+b = np.array([-1, 2, 3])
+x = np.zeros_like(b)
+
+# Factorizacion LU
+L = np.tril(A)
+U = A - L
+
+# Inversa de matriz L
+L_inv = np.linalg.inv(L)
+
+# x^(k+1) = L^(-1) ⋅ (b - Ux^(k))
+# x^(k+1) = (L^(-1) ⋅ b) - (L^(-1) ⋅ Ux^(k)) 
+n = 10
+for i in range(n):
+    x = np.dot(L_inv, b - np.dot(U, x))
+    print(x)
+
+
